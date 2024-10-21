@@ -1,0 +1,20 @@
+# This file will automatically update with entries for new content after a build and reload.
+
+Items: {
+	VinewovenRecurve: {
+		DisplayName: Vinewoven Recurve
+		Tooltip: Each shot whispers the secrets of the Jungle.
+	}
+
+	VineArrow: {
+		DisplayName: Vine Arrow
+		Tooltip: ""
+	}
+
+	SkywardensBow: {
+		DisplayName: Skywardens Bow
+		Tooltip: A divine bow that channels the strength of the heavens. "May your aim be as true as the Goddess's light."
+	}
+}
+
+Projectiles.VineArrowProjectile.DisplayName: Vine Arrow Projectile

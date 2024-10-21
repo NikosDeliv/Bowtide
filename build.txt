@@ -1,0 +1,3 @@
+displayName = Bowtide
+author = Nico18n3
+version = 0.1.1
