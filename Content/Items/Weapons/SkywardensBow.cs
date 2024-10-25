@@ -12,9 +12,6 @@ namespace Bowtide.Content.Items.Weapons
         {
             Item.damage = 60; // Set the bow's damage
             Item.DamageType = DamageClass.Ranged;
-            Item.width = 20;
-            Item.height = 40;
-            Item.useTime = 20;
             Item.useAnimation = 20;
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.noMelee = true;
@@ -25,8 +22,16 @@ namespace Bowtide.Content.Items.Weapons
             Item.shoot = ProjectileID.WoodenArrowFriendly;
             Item.shootSpeed = 12f;
             Item.useAmmo = AmmoID.Arrow;
-            Item.scale = 0.8f;
+            Item.height = 50;
+            Item.width = 20;
+            Item.scale = 2f;
+            Item.useTime = 23;
+            Item.autoReuse = true;
+          
         }
+
+       public override Vector2? HoldoutOffset() => new Vector2(-5f, 0f);
+
         public override void AddRecipes()
         {
             Recipe recipe = CreateRecipe();

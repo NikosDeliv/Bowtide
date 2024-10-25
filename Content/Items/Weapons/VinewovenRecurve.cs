@@ -23,10 +23,11 @@ namespace Bowtide.Content.Items.Weapons
             Item.rare = ItemRarityID.LightRed;
             Item.useAmmo = AmmoID.Arrow; // Use any arrow as ammo
             Item.shoot = ProjectileID.WoodenArrowFriendly; // Default to wooden arrows
-            Item.shootSpeed = 5f;
+            Item.shootSpeed = 3f;
             Item.noMelee = true;
             Item.scale = 2f;
             Item.UseSound = SoundID.Item5;
+            Item.autoReuse = true;
         }
 
         // Shoot two arrows, and convert wooden arrows to custom VineArrow
@@ -51,6 +52,7 @@ namespace Bowtide.Content.Items.Weapons
             return false; 
         }
 
+        public override Vector2? HoldoutOffset() => new Vector2(-3f, 0f);
         public override void AddRecipes()
         {
             Recipe recipe = CreateRecipe();
