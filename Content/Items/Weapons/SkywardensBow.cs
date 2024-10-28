@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.DataStructures;
+using Bowtide.Content.Projectiles.Ranged;
 
 namespace Bowtide.Content.Items.Weapons
 {
@@ -19,7 +20,7 @@ namespace Bowtide.Content.Items.Weapons
             Item.value = Item.buyPrice(gold: 5);
             Item.rare = ItemRarityID.LightPurple;
             Item.UseSound = SoundID.Item5;
-            Item.shoot = ProjectileID.WoodenArrowFriendly;
+            Item.shoot = ModContent.ProjectileType<SkywardensBlessing>();
             Item.shootSpeed = 12f;
             Item.useAmmo = AmmoID.Arrow;
             Item.height = 50;
@@ -27,10 +28,24 @@ namespace Bowtide.Content.Items.Weapons
             Item.scale = 2f;
             Item.useTime = 23;
             Item.autoReuse = true;
-          
+
         }
 
-       public override Vector2? HoldoutOffset() => new Vector2(-5f, 0f);
+
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            // Override the type to always be SkywardensBlessing, no matter what arrow is used
+            type = ModContent.ProjectileType<Projectiles.Ranged.SkywardensBlessing>();
+
+            // Fire the SkywardensBlessing projectile
+            Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
+
+            // Return false so the default arrow doesn't also spawn
+            return false;
+        }
+
+
+        public override Vector2? HoldoutOffset() => new Vector2(-5f, 0f);
 
         public override void AddRecipes()
         {

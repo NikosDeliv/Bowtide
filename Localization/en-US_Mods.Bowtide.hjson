@@ -15,6 +15,20 @@ Items: {
 		DisplayName: Skywardens Bow
 		Tooltip: A divine bow that channels the strength of the heavens. "May your aim be as true as the Goddess's light."
 	}
+
+	Bowmerang: {
+		DisplayName: Bowmerang
+		Tooltip:
+			'''
+			A bow that doubles as a boomerang.
+			Left click to shoot arrows, right click to throw the bow as a boomerang.
+
+			'''
+	}
 }
 
-Projectiles.VineArrowProjectile.DisplayName: Vine Arrow Projectile
+Projectiles: {
+	VineArrowProjectile.DisplayName: Vine Arrow Projectile
+	BowmerangProjectile.DisplayName: Bowmerang Projectile
+	SkywardensBlessing.DisplayName: Skywardens Blessing
+}
