@@ -3,7 +3,12 @@
 Items: {
 	VinewovenRecurve: {
 		DisplayName: Vinewoven Recurve
-		Tooltip: Each shot whispers the secrets of the Jungle.
+		Tooltip:
+			'''
+			Converts regular arrows into Vine Arrows
+			"Each shot whispers the secrets of the Jungle."
+
+			'''
 	}
 
 	VineArrow: {
@@ -13,7 +18,12 @@ Items: {
 
 	SkywardensBow: {
 		DisplayName: Skywardens Bow
-		Tooltip: A divine bow that channels the strength of the heavens. "May your aim be as true as the Goddess's light."
+		Tooltip:
+			'''
+			A divine bow that channels the strength of the heavens.
+			"May your aim be as true as the Goddess's light."
+
+			'''
 	}
 
 	Bowmerang: {
@@ -22,6 +32,17 @@ Items: {
 			'''
 			A bow that doubles as a boomerang.
 			Left click to shoot arrows, right click to throw the bow as a boomerang.
+
+			'''
+	}
+
+	HuntersEmblem: {
+		DisplayName: Hunters Emblem
+		Tooltip:
+			'''
+			Increases ranged damage by 8%
+			Boosts movement speed slightly when equipped
+			"An emblem awarded to seasoned hunters, empowering each shot and step."
 
 			'''
 	}

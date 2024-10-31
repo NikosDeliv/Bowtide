@@ -7,6 +7,8 @@ namespace Bowtide.Content.Projectiles.Ranged
 {
     public class SkywardensBlessing : ModProjectile
     {
+        private bool hasSpawnedEffect = false; // Prevents multiple trail spawns
+
         public override void SetStaticDefaults()
         {
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10; // Number of frames the trail is visible
@@ -32,15 +34,15 @@ namespace Bowtide.Content.Projectiles.Ranged
             // Add light based on the projectile position
             Lighting.AddLight(Projectile.position, 0.0f, 0.6f, 0.9f); // Cyan light
 
-            // Spawn trail copies at intervals
-            if (Projectile.timeLeft % 5 == 0) // Controls frequency of trail copies
+            // Control trail spawn to avoid excessive projectiles
+            if (Projectile.timeLeft % 10 == 0 && !hasSpawnedEffect) // Less frequent trail and check if spawned
             {
-                Vector2 trailPosition = Projectile.position + new Vector2(Main.rand.Next(-2, 3), Main.rand.Next(-2, 3));
+                hasSpawnedEffect = true; // Ensure effect spawns only once per interval
 
                 // Create a smaller version of the main projectile as a trail
                 Projectile trail = Projectile.NewProjectileDirect(
                     Projectile.GetSource_FromThis(),
-                    trailPosition,
+                    Projectile.position,
                     Projectile.velocity * 0.9f, // Slightly slower than main projectile
                     Projectile.type,
                     Projectile.damage / 2, // Lower damage for the trail projectiles
@@ -54,22 +56,29 @@ namespace Bowtide.Content.Projectiles.Ranged
                 trail.timeLeft = 10; // Short lifespan for trail effect
                 trail.penetrate = -1; // No penetration
                 trail.tileCollide = false; // Trail copies should phase through blocks
-
-                // Optionally adjust appearance for the trail
                 trail.light = 0.3f; // Slightly less light for the trail
             }
         }
 
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
-            // Additional effects on hit, such as a small explosion or more particles
-            for (int i = 0; i < 10; i++)
+            // Additional effects on hit
+            if (!hasSpawnedEffect)
             {
-                Dust dust = Dust.NewDustDirect(target.position, target.width, target.height, DustID.Electric);
-                dust.velocity *= 1.5f;
-                dust.scale = 1.5f;
-                dust.noGravity = true;
+                hasSpawnedEffect = true; // Prevent multiple effects on hit
+                for (int i = 0; i < 10; i++)
+                {
+                    Dust dust = Dust.NewDustDirect(target.position, target.width, target.height, DustID.Electric);
+                    dust.velocity *= 1.5f;
+                    dust.scale = 1.5f;
+                    dust.noGravity = true;
+                }
             }
+        }
+
+        public override void Kill(int timeLeft)
+        {
+            hasSpawnedEffect = false; // Reset for future projectiles
         }
     }
 }
