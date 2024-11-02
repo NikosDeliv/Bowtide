@@ -46,6 +46,16 @@ Items: {
 
 			'''
 	}
+
+	ForestEmbrace: {
+		DisplayName: Forest Embrace
+		Tooltip:
+			'''
+			Gradually regenerates health when stationary in a forest biome
+			"This charm pulses with the life of the forest, rejuvenating those who protect it."
+
+			'''
+	}
 }
 
 Projectiles: {
