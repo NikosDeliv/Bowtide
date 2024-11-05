@@ -12,7 +12,7 @@ namespace Bowtide.Utilities
         {
             if (shop.NpcType == NPCID.Dryad)
             {
-                // This will make the Dryad sell the item in Overworld height (Forest) biome
+                
                 shop.Add(ModContent.ItemType<ForestEmbrace>(), Condition.InOverworldHeight);
             }
         }
