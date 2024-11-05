@@ -11,7 +11,7 @@ namespace Bowtide.Content.Items.Weapons
     {
         public override void SetDefaults()
         {
-            Item.damage = 60; // Set the bow's damage
+            Item.damage = 60; 
             Item.DamageType = DamageClass.Ranged;
             Item.useAnimation = 20;
             Item.useStyle = ItemUseStyleID.Shoot;
