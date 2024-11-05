@@ -1,2 +1,4 @@
-This is a mod that adds more bows to Terraria. 
-Its a relatively small mod so far and it only adds 2 new bows and a new arrow type but Im plannning to add more in the future as I continue to develop the mod.
+This is a mod that expands the Archery aspect of Terraria.
+
+
+Its relatively small so far but Im plannning on expanding its contents more in the future as I continue to develop the mod.
