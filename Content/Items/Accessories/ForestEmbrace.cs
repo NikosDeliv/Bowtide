@@ -29,7 +29,7 @@ namespace Bowtide.Content.Items.Accessories
         private void ApplyForestRegen(Player player)
         {
             // Increases the player's lifeRegen by 5 
-            player.lifeRegen += 5; 
+            player.lifeRegen += 5; // The value can be increased for a stronger effect
 
 
             if (Main.rand.NextBool(10)) // Control spawn rate of particles

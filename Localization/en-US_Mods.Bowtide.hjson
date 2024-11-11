@@ -56,10 +56,38 @@ Items: {
 
 			'''
 	}
+
+	ArrowStatueItem: {
+		DisplayName: Arrow Statue
+		Tooltip:
+			'''
+			Nearby Players have a chance not to consume arrows upon firing.
+
+			'''
+	}
+
+	BowStatueItem: {
+		DisplayName: Bow Statue
+		Tooltip:
+			'''
+			Nearby Players gain increased ranged damage.
+
+			'''
+	}
+
+	TheTide: {
+		DisplayName: The Tide
+		Tooltip:
+			'''
+			"Wield the boundless power of cosmic tides. Arrows transform into waves of celestial light, sweeping foes into the depths of eternity."
+
+			'''
+	}
 }
 
 Projectiles: {
 	VineArrowProjectile.DisplayName: Vine Arrow Projectile
 	BowmerangProjectile.DisplayName: Bowmerang Projectile
 	SkywardensBlessing.DisplayName: Skywardens Blessing
+	CosmicArrowProjectile.DisplayName: Cosmic Arrow Projectile
 }
