@@ -57,24 +57,6 @@ Items: {
 			'''
 	}
 
-	ArrowStatueItem: {
-		DisplayName: Arrow Statue
-		Tooltip:
-			'''
-			Nearby Players have a chance not to consume arrows upon firing.
-
-			'''
-	}
-
-	BowStatueItem: {
-		DisplayName: Bow Statue
-		Tooltip:
-			'''
-			Nearby Players gain increased ranged damage.
-
-			'''
-	}
-
 	TheTide: {
 		DisplayName: The Tide
 		Tooltip:
@@ -82,6 +64,11 @@ Items: {
 			"Wield the boundless power of cosmic tides. Arrows transform into waves of celestial light, sweeping foes into the depths of eternity."
 
 			'''
+	}
+
+	CosmicArrow: {
+		DisplayName: Cosmic Arrow
+		Tooltip: ""
 	}
 }
 

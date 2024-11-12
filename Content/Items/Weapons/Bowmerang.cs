@@ -3,13 +3,12 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.DataStructures;
-using Bowtide.Content.Projectiles;
+using Bowtide.Content.Projectiles.Ranged;
 
 namespace Bowtide.Content.Items.Weapons
 {
     public class Bowmerang : ModItem
     {
-
         private bool boomerangActive = false;
 
         public override void SetDefaults()
@@ -27,46 +26,49 @@ namespace Bowtide.Content.Items.Weapons
             Item.rare = ItemRarityID.Green;
             Item.UseSound = SoundID.Item5;
             Item.shoot = ProjectileID.WoodenArrowFriendly;
-            Item.shootSpeed = 10f;
+            Item.shootSpeed = 12f;
             Item.useAmmo = AmmoID.Arrow;
             Item.autoReuse = true;
         }
 
-
-
-
-            public override bool AltFunctionUse(Player player)
-            {
-                // Enable alternate function (right-click) to throw the boomerang
-                return true;
-            }
+        public override bool AltFunctionUse(Player player)
+        {
+            return true; // Enable right-click functionality
+        }
 
         public override bool CanUseItem(Player player)
         {
-            if (player.altFunctionUse == 2) // Right-click: Boomerang mode
+            if (player.altFunctionUse == 2) // Right-click for Boomerang mode
             {
-                if (!boomerangActive) // If boomerang is not active, throw it
+                if (!boomerangActive) // Only allow if boomerang is not active
                 {
-                    Item.shoot = ModContent.ProjectileType<Projectiles.Ranged.BowmerangProjectile>();
-                    Item.shootSpeed = 10f; // Boomerang speed
-                    boomerangActive = true; // Set boomerang as active
+                    Item.useTime = 30; // Adjust throw timing
+                    Item.useAnimation = 30;
+                    Item.shoot = ModContent.ProjectileType<BowmerangProjectile>(); // Throw the boomerang
+                    Item.shootSpeed = 10f;
+                    Item.useAmmo = AmmoID.None; // Prevent arrow use
+                    Item.noUseGraphic = true; // Hide bow in hand
+                    boomerangActive = true; // Mark boomerang as active
                 }
                 else
                 {
-                    return false; // Prevent additional boomerang throws
+                    return false; // Prevent additional throws if boomerang is out
                 }
             }
-            else // Left-click: Arrow mode
+            else // Left-click for Arrow mode
             {
-                if (!boomerangActive) // Only shoot arrows if boomerang is not active
+                if (!boomerangActive) // Only shoot arrows if boomerang is not out
                 {
+                    Item.useTime = 20;
+                    Item.useAnimation = 20;
                     Item.shoot = ProjectileID.WoodenArrowFriendly;
                     Item.shootSpeed = 12f;
-                    return true;
+                    Item.useAmmo = AmmoID.Arrow;
+                    Item.noUseGraphic = false; // Show bow in hand
                 }
                 else
                 {
-                    return false; // Block arrow shooting if the boomerang is out
+                    return false; // Block arrow shooting if boomerang is active
                 }
             }
             return base.CanUseItem(player);
@@ -74,37 +76,29 @@ namespace Bowtide.Content.Items.Weapons
 
         public void ResetBoomerang()
         {
-            boomerangActive = false; // Reset when boomerang comes back or is destroyed
+            boomerangActive = false; // Reset boomerang state when it returns or despawns
         }
 
-
-
-
-        public override bool Shoot(Player player, Terraria.DataStructures.EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            if (player.altFunctionUse == 2) // Right-click: Boomerang
             {
-                if (player.altFunctionUse == 2) // Right-click: Boomerang
-                {
-                    type = ModContent.ProjectileType<Projectiles.Ranged.BowmerangProjectile>(); // Use custom boomerang projectile
-                    Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
-                }
-                else // Left-click: Arrows
-                {
-                    type = ProjectileID.WoodenArrowFriendly; // Shoot arrows
-                    Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
-                }
-
-                return false; // Return false to manually handle the projectile firing
+                type = ModContent.ProjectileType<BowmerangProjectile>(); // Use custom boomerang projectile
+                Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
+                return false; // Manually handle boomerang throw
             }
+            // Left-click: Arrow shooting
+            return true; // Use default arrow shooting behavior
+        }
 
-            public override void AddRecipes()
-            {
-                Recipe recipe = CreateRecipe();
-                recipe.AddIngredient(ItemID.WoodenBoomerang, 1); 
-                recipe.AddIngredient(ItemID.Wood, 15); 
-                recipe.AddIngredient(ItemID.Cobweb, 10); 
-                recipe.AddTile(TileID.Anvils);
-                recipe.Register();
-            }
-        
+        public override void AddRecipes()
+        {
+            Recipe recipe = CreateRecipe();
+            recipe.AddIngredient(ItemID.WoodenBoomerang, 1);
+            recipe.AddIngredient(ItemID.Wood, 15);
+            recipe.AddIngredient(ItemID.Cobweb, 10);
+            recipe.AddTile(TileID.Anvils);
+            recipe.Register();
+        }
     }
 }
