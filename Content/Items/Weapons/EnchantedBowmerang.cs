@@ -7,13 +7,13 @@ using Bowtide.Content.Projectiles.Ranged;
 
 namespace Bowtide.Content.Items.Weapons
 {
-    public class Bowmerang : ModItem
+    public class EnchantedBowmerang : ModItem
     {
-        private bool boomerangActive = false;
+        private bool enchantedboomerangActive = false;
 
         public override void SetDefaults()
         {
-            Item.damage = 20;
+            Item.damage = 30;
             Item.DamageType = DamageClass.Ranged;
             Item.width = 30;
             Item.height = 30;
@@ -22,7 +22,7 @@ namespace Bowtide.Content.Items.Weapons
             Item.useStyle = ItemUseStyleID.Shoot;
             Item.noMelee = true;
             Item.knockBack = 4f;
-            Item.value = Item.buyPrice(gold: 5);
+            Item.value = Item.buyPrice(gold: 20);
             Item.rare = ItemRarityID.Green;
             Item.UseSound = SoundID.Item5;
             Item.shoot = ProjectileID.WoodenArrowFriendly;
@@ -33,42 +33,42 @@ namespace Bowtide.Content.Items.Weapons
 
         public override bool AltFunctionUse(Player player)
         {
-            return true; // Enable right-click functionality
+            return true;
         }
 
         public override bool CanUseItem(Player player)
         {
-            if (player.altFunctionUse == 2) // Right-click for Boomerang mode
+            if (player.altFunctionUse == 2)
             {
-                if (!boomerangActive) // Only allow if boomerang is not active
+                if (!enchantedboomerangActive) 
                 {
-                    Item.useTime = 30; // Adjust throw timing
+                    Item.useTime = 30; 
                     Item.useAnimation = 30;
-                    Item.shoot = ModContent.ProjectileType<BowmerangProjectile>(); // Throw the boomerang
+                    Item.shoot = ModContent.ProjectileType<EnchantedBowmerangProjectile>();
                     Item.shootSpeed = 10f;
-                    Item.useAmmo = AmmoID.None; // Prevent arrow use
-                    Item.noUseGraphic = true; // Hide bow in hand
-                    boomerangActive = true; // Mark boomerang as active
+                    Item.useAmmo = AmmoID.None;
+                    Item.noUseGraphic = true;
+                    enchantedboomerangActive = true;
                 }
                 else
                 {
-                    return false; // Prevent additional throws if boomerang is out
+                    return false;
                 }
             }
-            else // Left-click for Arrow mode
+            else 
             {
-                if (!boomerangActive) // Only shoot arrows if boomerang is not out
+                if (!enchantedboomerangActive)
                 {
                     Item.useTime = 20;
                     Item.useAnimation = 20;
                     Item.shoot = ProjectileID.WoodenArrowFriendly;
                     Item.shootSpeed = 12f;
                     Item.useAmmo = AmmoID.Arrow;
-                    Item.noUseGraphic = false; // Show bow in hand
+                    Item.noUseGraphic = false; 
                 }
                 else
                 {
-                    return false; // Block arrow shooting if boomerang is active
+                    return false; 
                 }
             }
             return base.CanUseItem(player);
@@ -76,14 +76,14 @@ namespace Bowtide.Content.Items.Weapons
 
         public void ResetBoomerang()
         {
-            boomerangActive = false; // Reset boomerang state when it returns or despawns
+            enchantedboomerangActive = false; // Reset boomerang state when it returns or despawns
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             if (player.altFunctionUse == 2) // Right-click: Boomerang
             {
-                type = ModContent.ProjectileType<BowmerangProjectile>(); // Use custom boomerang projectile
+                type = ModContent.ProjectileType<EnchantedBowmerangProjectile>(); // Use custom boomerang projectile
                 Projectile.NewProjectile(source, position, velocity, type, damage, knockback, player.whoAmI);
                 return false; // Manually handle boomerang throw
             }
@@ -94,9 +94,8 @@ namespace Bowtide.Content.Items.Weapons
         public override void AddRecipes()
         {
             Recipe recipe = CreateRecipe();
-            recipe.AddIngredient(ItemID.WoodenBoomerang, 1);
-            recipe.AddIngredient(ItemID.Wood, 15);
-            recipe.AddIngredient(ItemID.Cobweb, 10);
+            recipe.AddIngredient(ModContent.ItemType<Bowmerang>(), 1);
+            recipe.AddIngredient(ItemID.FallenStar, 10);
             recipe.AddTile(TileID.Anvils);
             recipe.Register();
         }

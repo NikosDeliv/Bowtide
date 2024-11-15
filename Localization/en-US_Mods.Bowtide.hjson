@@ -70,6 +70,16 @@ Items: {
 		DisplayName: Cosmic Arrow
 		Tooltip: ""
 	}
+
+	EnchantedBowmerang: {
+		DisplayName: Enchanted Bowmerang
+		Tooltip:
+			'''
+			A Bowmerang enchanted by the stars
+			Left click to shoot arrows, right click to throw the bow as a boomerang.
+
+			'''
+	}
 }
 
 Projectiles: {
@@ -77,4 +87,5 @@ Projectiles: {
 	BowmerangProjectile.DisplayName: Bowmerang Projectile
 	SkywardensBlessing.DisplayName: Skywardens Blessing
 	CosmicArrowProjectile.DisplayName: Cosmic Arrow Projectile
+	EnchantedBowmerangProjectile.DisplayName: Enchanted Bowmerang Projectile
 }

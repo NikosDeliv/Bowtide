@@ -1,2 +1,5 @@
 This is a mod that adds more bows to Terraria.
 Its a relatively small mod so far but im still developing it and plan on adding more things as time goes by.
+
+//DISCLAIMER//
+There is a bug regarding the Bowmerang and the Enchanted Bowmerang where when you right click to throw it out like a normal boomerang and change the item you're holding while/when it comes back you wont be able to shoot or throw the weapon ( you will be able to use the other weapons normally this just happens with these 2 )

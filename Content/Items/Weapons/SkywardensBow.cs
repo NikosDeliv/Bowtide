@@ -28,7 +28,7 @@ namespace Bowtide.Content.Items.Weapons
             Item.scale = 2f;
             Item.useTime = 23;
             Item.autoReuse = true;
-
+            Item.Size = new Vector2(64, 64);
         }
 
 
