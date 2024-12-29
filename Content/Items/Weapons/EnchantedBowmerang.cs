@@ -74,9 +74,17 @@ namespace Bowtide.Content.Items.Weapons
             return base.CanUseItem(player);
         }
 
+        public override void UpdateInventory(Player player)
+        {
+            if (player.HeldItem.type != Item.type && enchantedboomerangActive)
+            {
+                ResetBoomerang();
+            }
+        }
         public void ResetBoomerang()
         {
             enchantedboomerangActive = false; // Reset boomerang state when it returns or despawns
+            Item.noUseGraphic = false;
         }
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
