@@ -30,7 +30,8 @@ namespace Bowtide.Content.Projectiles.Ranged
 
             // Get the player holding the Bowmerang item
             Player player = Main.player[Projectile.owner];
-            if (player.HeldItem.ModItem is Bowmerang bowmerang)
+            foreach (Item item in player.inventory)
+            if (item.ModItem is Bowmerang bowmerang)
             {
                 bowmerang.ResetBoomerang(); // Reset boomerangActive flag
             }

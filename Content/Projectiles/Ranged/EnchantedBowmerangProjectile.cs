@@ -36,9 +36,10 @@ namespace Bowtide.Content.Projectiles.Ranged
             SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
 
             Player player = Main.player[Projectile.owner];
-            if (player.HeldItem.ModItem is EnchantedBowmerang bowmerang)
-            {
-                bowmerang.ResetBoomerang(); 
+            foreach (Item item in player.inventory)
+                if (item.ModItem is EnchantedBowmerang enchantedbowmerang)
+                {
+                enchantedbowmerang.ResetBoomerang(); 
             }
         }
 
