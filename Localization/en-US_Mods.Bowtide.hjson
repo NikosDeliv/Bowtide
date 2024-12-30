@@ -80,6 +80,16 @@ Items: {
 
 			'''
 	}
+
+	Nightpiercer: {
+		DisplayName: Nightpiercer
+		Tooltip: Forged from the essence of midnight, it strikes with silent precision.
+	}
+
+	WrathofArtemis: {
+		DisplayName: Wrath of Artemis
+		Tooltip: A divine bow imbued with the fury of the huntress herself.
+	}
 }
 
 Projectiles: {
